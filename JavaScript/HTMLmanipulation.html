@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan ID dan Class</title>
+</head>
+
+<body>
+    <h1 id="mainTitle">Selamat Datang!</h1>
+    <div class="content">
+        <p class="text">Ini adalah teks pertama.</p>
+        <p class="text">Ini adalah teks kedua.</p>
+    </div>
+
+    <button id="changeContent"> Ubah Konten</button>
+    <script>
+        var name = "Fauzan Mas'ud Ramadhani";
+
+        document.getElementById("mainTitle").innerText = `Hallo Nama Saya Adalah ${name}`;
+
+        var textElements = document.getElementsByClassName("text");
+        for (var i = 0; i < textElements.length; i++) {
+            textElements[i].innerText = "Teks telah diubah";
+        }
+        document.getElementById("changeContent").addEventListener("click", function () {
+            for (var i = 0; i < textElements.length; i++) {
+                textElements[i].style.backgroundColor = "yellow";
+            }
+        });
+    </script>
+</body>
+
+</html>

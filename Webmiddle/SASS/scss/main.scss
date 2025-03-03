@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'base';
+@import 'layout';
+
+// Theme Mixin
+@mixin theme($bg-color, $text-color) {
+    background-color: $bg-color;
+    color: $text-color;
+}
+
+// Default Light Theme
+body {
+    @include theme($light-bg, $light-text);
+}
+
+// Dark Theme Class
+body.dark-mode {
+    @include theme($dark-bg, $dark-text);
+}

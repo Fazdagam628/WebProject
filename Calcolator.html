@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Sederhana</title>
+</head>
+
+<body>
+    <input type="number" name="" id="angka1" placeholder="angka 1">
+    <input type="number" name="" id="angka2" placeholder="angka 2">
+    <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="x">x</option>
+        <option value="/">/</option>
+    </select>
+    <button onclick="hitung()">Hitung</button>
+    <b>Hasil : </b><span id="hasil"></span>
+
+    <script>
+        var angka1 = document.getElementById('angka1');
+        var angka2 = document.getElementById('angka2');
+        var hasil = document.getElementById('hasil');
+
+        function hitung() {
+            var operator = document.getElementById('operator').value;
+            var proses;
+            var nilai1 = parseInt(angka1.value);
+            var nilai2 = parseInt(angka2.value);
+
+            if (operator === "/" && nilai1 === 0 && nilai2 === 0) {
+                alert('Hasil dari 0 dibagi 0 adalah tidak terdefinisi');
+                hasil.innerHTML = '';
+                return;
+            }
+
+            switch (operator) {
+                case "x":
+                    proses = nilai1 * nilai2;
+                    break;
+                case "/":
+                    proses = nilai1 / nilai2;
+                    break;
+                case "+":
+                    proses = nilai1 + nilai2;
+                    break;
+                case "-":
+                    proses = nilai1 - nilai2;
+                    break;
+            }
+
+            hasil.innerHTML = 'Hasilnya adalah ' + proses;
+            if (proses < 0) {
+                hasil.style.color = '#FF0000';
+            } else {
+                hasil.style.color = '#000000';
+            }
+        }
+    </script>
+</body>
+
+</html>

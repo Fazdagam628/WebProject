@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan JQuery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // $("#hide").click(function () {
+            //     $("p").hide("slow");
+            // });
+            // $("#show").click(function () {
+            //     $("p").show("slow");
+            // });
+            // $("#toggle").click(function () {
+            //     $("p").toggle("slow");
+            // });
+
+            // $("#fadein").click(function () {
+            //     $("#div1").fadeIn();
+            //     $("#div2").fadeIn("slow");
+            //     $("#div3").fadeIn(3000);
+            // });
+            // $("#fadeout").click(function () {
+            //     $("#div1").fadeOut();
+            //     $("#div2").fadeOut("slow");
+            //     $("#div3").fadeOut(3000);
+            // });
+            // $("#fadetoggle").click(function () {
+            //     $("#div1").fadeToggle();
+            //     $("#div2").fadeToggle("slow");
+            //     $("#div3").fadeToggle(3000);
+            // });
+            // Mengubah teks paragraf
+            // $("p").text("Ini paragraf baru!");
+            // // Menambahkan class ke elemen <div>
+            // $("div").addClass("highlight");
+
+            // // Ketika tombol di klik
+            // $("#alert").click(function () {
+            //     alert("Tombol ini di klik!");
+            // });
+
+            // // Hover pada element
+            // $("h1").hover(function () {
+            //     $(this).css("color", "red");
+            // }, function () {
+            //     $(this).css("color", "black");
+            // });
+
+            // $.ajax({
+            //     url: "https://jsonplaceholder.typicode.com/posts/3",
+            //     method: "GET",
+            //     success: function (data) {
+            //         console.log(data);
+            //         $("#content").html(data.title);
+            //     },
+            //     error: function (err) {
+            //         console.log("Error: ", err);
+            //     }
+            // });
+
+            // Latihan 1
+            // $(".paragraf").text("Ini paragraf baru");
+            // $("p").addClass("highlight");
+
+            // // Latihan 2
+            // $(".box").css("background-color", "blue").css("color", "white").text("Ini kotak manipulasi");
+
+            // // Latihan 3
+            // $("#klikSaya").hover(function () {
+            //     $(this).css("background-color", "green");
+            // }, function () {
+            //     $(this).css("background-color", "white");
+            //     $(this).click(function () {
+            //         $("#klikOutput").text("Tombol ini sudah diklik!");
+            //     })
+            // });
+
+            // // Latihan 4
+            // $("#sembunyikan").click(function () {
+            //     $("#animasi").hide("slow");
+            // });
+            // $("#tampilkan").click(function () {
+            //     $("#animasi").show("slow");
+            // });
+
+            // // Latihan 5
+            // $.ajax({
+            //     url: "https://jsonplaceholder.typicode.com/posts/3",
+            //     method: "GET",
+            //     success: function (data) {
+            //         console.log(data);
+            //         $("#loadUser").click(function () {
+
+            //             $("#userData").html(data.title);
+            //         });
+            //         $("#unloadUser").click(function () {
+
+            //             $("#userData").toggle("slow");
+            //             $("#loadUser").toggle("slow");
+            //         });
+            //     },
+            //     error: function (err) {
+            //         console.log("Error: ", err);
+            //     }
+            // });
+            // $("#toggleButton").click(function () {
+            //     $("#animasiBox")
+            //         .slideToggle(1000)
+            //         .delay(500) // Memberi jeda 500ms sebelum perubahan warna
+            //         .animate({ color: "green" }, 2000); // Durasi animasi warna
+            // });
+
+
+            // Latihan 7
+            $("#submitForm").click(function () {
+                var name = $("#nameInput").val();
+                $("#output").text("Halo, " + name + "!");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!-- <p>If you</p>
+
+    <button id="hide">Hide</button>
+    <button id="show">Show</button>
+    <button id="toggle">Toggle</button>
+
+
+    <p>Demonstrate fadeIn() with different parameters.</p>
+
+    <button id="fadein">Click to fade in boxes</button><br><br>
+    <button id="fadeout">Click to fade out boxes</button><br><br>
+    <button id="fadetoggle">Click to fade toggle boxes</button><br><br>
+
+    <div id="div1" style="width:80px;height:80px;display:none;background-color:red;"></div><br>
+    <div id="div2" style="width:80px;height:80px;display:none;background-color:green;"></div><br>
+    <div id="div3" style="width:80px;height:80px;display:none;background-color:blue;"></div> -->
+    <!-- <p></p>
+    <div></div>
+
+    <button id="alert">Alert</button>
+    <h1>Coba Hover</h1>
+
+    <div id="content"></div> -->
+
+    <!-- Latihan 1 -->
+    <!-- <p class="paragraf">Ini paragraf pertama</p>
+    <p>Ini paragraf kedua</p>
+    <p id="paragraf-khusus">Ini paragraf dengan ID</p> -->
+
+    <!-- Latihan 2 -->
+    <!-- <div class="box">Kotak</div> -->
+
+    <!-- Latihan 3 -->
+    <!-- <button id="klikSaya">Klik Saya!</button>
+    <p id="klikOutput">Belum diklik</p> -->
+
+    <!-- Latihan 4 -->
+    <!-- <button id="sembunyikan">Sembunyikan</button>
+    <button id="tampilkan">Tampilkan</button>
+    <p id="animasi">Animasi Contoh</p> -->
+
+    <!-- Latihan 5
+    <div id="userData"></div>
+    <button id="loadUser">Ambil Data Pengguna</button>
+    <button id="unloadUser">Sembunyikan Data Pengguna</button> -->
+
+    <!-- Latihan 6
+    <button id="toggleButton">Toggle Animasi</button>
+    <div id="animasiBox">Box</div> -->
+
+    <!-- Latihan 7 -->
+    <form action="" id="userForm">
+        <label for="nameInput">Nama:</label>
+        <input type="text" id="nameInput" />
+        <button type="button" id="submitForm">Submit</button>
+    </form>
+    <p id="output"></p>
+</body>
+
+</html>

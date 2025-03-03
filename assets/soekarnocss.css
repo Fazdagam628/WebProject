@@ -1,0 +1,56 @@
+body {
+  background-image: url(https://images.pexels.com/photos/235985/pexels-photo-235985.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+p {
+  color: black;
+  font-size: 15px;
+  font-style: italic;
+  font-family: sans-serif;
+}
+h1 {
+  color: red;
+  font-style: italic;
+}
+.gambar {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+}
+.h3 {
+  text-align: center;
+}
+.h4 {
+  font-weight: bold;
+  color: darkorange;
+  font-size: 20px;
+  text-align: center;
+}
+.biodata {
+  font-weight: bold;
+  font-size: 17px;
+  text-align: justify;
+  font-style: normal;
+  font-family: 'Times New Roman', Times, serif
+}
+.paragraf {
+  color: rgb(255, 251, 0);
+  font-size: 16px;
+  font-family: "Times New Roman", Times, serif;
+  text-align: justify;
+}
+.float-end {
+  text-align: center;
+}
+div {
+  background-color: aqua;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
+}

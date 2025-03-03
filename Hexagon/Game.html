@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CSS Website Layout</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #222;
+            color: #ddd;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+        }
+
+        p {
+            text-align: center;
+            color: beige;
+        }
+
+        h1 {
+            color: rgb(163, 3, 255);
+            text-align: center
+        }
+
+        h4 {
+            text-align: center;
+            color: beige;
+        }
+
+        .game-container {
+            display: flex;
+            gap: 16%;
+        }
+
+        .title {
+            padding-top: 20px;
+        }
+
+        /* Middle column */
+        .column.middle {
+            position: relative;
+            border-style: ridge;
+            border-color: rgb(0, 0, 0);
+            padding-top: 550px;
+            width: 70%;
+        }
+
+        .column.inside {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 30%;
+            border-style: ridge;
+            border-color: rgb(0, 0, 0);
+            text-align: center;
+        }
+
+        .hex-row {
+            display: flex;
+            margin-top: -15px;
+        }
+
+        .hex-row:nth-child(even) {
+            margin-left: 30px;
+        }
+
+        .hex {
+            width: 60px;
+            height: 52px;
+            background-color: #2d3748;
+            margin: 1px;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        .hex:not(.disabled):hover {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        .player {
+            width: 70%;
+        }
+
+        .name {
+            display: flex;
+            gap: 25px;
+            text-align: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .content-1 {
+            margin: 10px;
+        }
+
+        .content-1 select {
+            margin-top: 5px;
+            width: 100%;
+            padding: 5px;
+            background-color: #555;
+            color: #ddd;
+            border: none;
+        }
+
+        .content-1 ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .content-1 li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .content-1 button {
+            padding: 5px 10px;
+            font-size: 12px;
+            background-color: #666;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .content-1 button:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">
+        <h1>HEXARIA</h1>
+    </div>
+    <div class="game-container">
+        <div class="column side">
+        </div>
+        <div class="column middle" id="gameBoard">
+            <div class="content">
+                <div class="column inside">
+                    <h4>LEADERBORD</h4>
+                    <div class="content-1">
+                        <label for="sort">Sort by:</label>
+                        <select id="sort">
+                            <option>Date</option>
+                            <option>Score</option>
+                        </select>
+                        <ul>
+                            <li>Budi VS Jaki <button>Detail</button></li>
+                            <li>Budi VS Jaki <button>Detail</button></li>
+                            <li>Budi VS Jaki <button>Detail</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="player">
+                    <div class="score">
+                        <p>
+                            Current: 11
+                        </p>
+                        <div class="name">
+                            <span>Budi: 321</span>
+                            <span>Irfan: 125</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column side">
+    </div>
+    <script>
+        class HexariaGame {
+            constructor() {
+                this.boardSize = 8;
+                this.currentPlayer = 'blue';
+                this.scores = {
+                    blue: 0,
+                    red: 0
+                };
+                this.board = [];
+                this.initializeBoard();
+                this.renderBoard();
+            }
+
+            initializeBoard() {
+                this.board = [];
+                for (let row = 0; row < this.boardSize; row++) {
+                    this.board[row] = [];
+                    for (let col = 0; col < this.boardSize; col++) {
+                        this.board[row][col] = {
+                            value: Math.floor(Math.random() * 20) + 1,
+                            owner: null,
+                            disabled: this.shouldDisableCell(row, col)
+                        };
+                    }
+                }
+            }
+
+            shouldDisableCell(row, col) {
+                return (row + col) > (this.boardSize * 1.5) ||
+                    Math.abs(row - col) > (this.boardSize / 2);
+            }
+
+            makeMove(row, col) {
+                if (this.isValidMove(row, col)) {
+                    const cell = this.board[row][col];
+                    cell.owner = this.currentPlayer;
+                    this.scores[this.currentPlayer] += cell.value;
+                    this.currentPlayer = this.currentPlayer === 'blue' ? 'red' : 'blue';
+                    this.updateUI();
+                    return true;
+                }
+                return false;
+            }
+
+            isValidMove(row, col) {
+                if (row < 0 || row >= this.boardSize || col < 0 || col >= this.boardSize) {
+                    return false;
+                }
+                return !this.board[row][col].owner && !this.board[row][col].disabled;
+            }
+
+            renderBoard() {
+                const boardElement = document.getElementById('gameBoard');
+                boardElement.innerHTML = '';
+
+                for (let row = 0; row < this.boardSize; row++) {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.className = 'hex-row';
+
+                    for (let col = 0; col < this.boardSize; col++) {
+                        const cell = this.board[row][col];
+                        const hex = document.createElement('div');
+                        hex.className = hex ${ cell.owner || '' } ${ cell.disabled ? 'disabled' : '' };
+
+                        if (!cell.disabled) {
+                            hex.onclick = () => this.makeMove(row, col);
+                        }
+
+                        const value = document.createElement('span');
+                        value.className = 'hex-value';
+                        value.textContent = cell.value;
+                        hex.appendChild(value);
+
+                        rowDiv.appendChild(hex);
+                    }
+                    boardElement.appendChild(rowDiv);
+                }
+            }
+
+            updateUI() {
+                document.getElementById('blueScore').textContent = this.scores.blue;
+                document.getElementById('redScore').textContent = this.scores.red;
+                const currentPlayerEl = document.getElementById('currentPlayer');
+                currentPlayerEl.innerHTML = Current Player: <span style="color: ${this.currentPlayer === 'blue' ? '#4299e1' : '#f56565'}">${this.currentPlayer.charAt(0).toUpperCase() + this.currentPlayer.slice(1)}</span>;
+                this.renderBoard();
+            }
+
+            reset() {
+                this.currentPlayer = 'blue';
+                this.scores = { blue: 0, red: 0 };
+                this.initializeBoard();
+                this.updateUI();
+            }
+        }
+
+        let game = new HexariaGame();
+
+        function resetGame() {
+            game.reset();
+        }
+    </script>
+</body>
+
+</html>

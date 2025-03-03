@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222;
+            color: #ddd;
+            font-family: Arial, sans-serif;
+        }
+
+        .hexaria-container {
+            width: 80%;
+            max-width: 1000px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #aa77ff;
+            margin-bottom: 20px;
+        }
+
+        /* Layout container for game content */
+        .game-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* Hexagonal grid styling */
+        .hex-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 50px);
+            gap: 5px;
+            margin-right: 20px;
+        }
+
+        .hex-cell {
+            width: 50px;
+            height: 50px;
+            background-color: #444;
+            color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            font-size: 14px;
+        }
+
+        .hex-cell.red {
+            background-color: #f77;
+            /* Color for player 1 */
+        }
+
+        .hex-cell.blue {
+            background-color: #77f;
+            /* Color for player 2 */
+        }
+
+        /* Leaderboard styling */
+        .leaderboard {
+            width: 200px;
+            padding: 20px;
+            background-color: #333;
+            border: 1px solid #555;
+            text-align: left;
+        }
+
+        .leaderboard h2 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .leaderboard label {
+            font-size: 14px;
+        }
+
+        .leaderboard select {
+            margin-top: 5px;
+            width: 100%;
+            padding: 5px;
+            background-color: #555;
+            color: #ddd;
+            border: none;
+        }
+
+        .leaderboard ul {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .leaderboard li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .leaderboard button {
+            padding: 5px 10px;
+            font-size: 12px;
+            background-color: #666;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .leaderboard button:hover {
+            background-color: #777;
+        }
+
+        /* Footer for current player and scores */
+        .footer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .current-player {
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .scores {
+            display: flex;
+            gap: 20px;
+        }
+
+        .scores span {
+            font-size: 16px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="hexaria-container">
+        <div class="header">
+            <h1>Hexaria</h1>
+        </div>
+        <div class="game-content">
+            <div class="hex-grid">
+                <!-- Each hex cell can be a div with a class "hex-cell" -->
+                <div class="hex-cell">10</div>
+                <div class="hex-cell">20</div>
+                <!-- More hex cells as needed -->
+            </div>
+            <div class="leaderboard">
+                <h2>Leaderboard</h2>
+                <label for="sort">Sort by:</label>
+                <select id="sort">
+                    <option>Date</option>
+                    <option>Score</option>
+                </select>
+                <ul>
+                    <li>Budi vs Irfan <button>Detail</button></li>
+                    <li>Budi vs Irfan <button>Detail</button></li>
+                    <li>Joko vs Jaki <button>Detail</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="current-player">Current: 11</div>
+            <div class="scores">
+                <span>Budi: 208</span>
+                <span>Irfan: 169</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

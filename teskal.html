@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="number" placeholder="angka 1" id="idInputAngka1">
+    <input type="number" placeholder="angka 2" id="idInputAngka2">
+    <button id="idTombolTambah">+</button>
+    <button id="idTombolKurang">-</button>
+    <button id="idTombolKali">*</button>
+    <button id="idTombolBagi">/</button>
+    <div>
+        <span id="idHasil"></span>
+    </div>
+
+    <script>
+        const angka1 = document.getElementById("idInputAngka1"); // Input angka pertama
+        const angka2 = document.getElementById("idInputAngka2"); // Input angka kedua
+        const tombolTambah = document.getElementById("idTombolTambah");
+        const tombolKurang = document.getElementById("idTombolKurang");
+        const tombolKali = document.getElementById("idTombolKali");
+        const tombolBagi = document.getElementById("idTombolBagi");
+        const hasil = document.getElementById("idHasil");
+
+
+        tombolTambah.addEventListener("click", tambah);
+        tombolKurang.addEventListener("click", kurang);
+        tombolKali.addEventListener("click", kali);
+        tombolBagi.addEventListener("click", bagi);
+
+        function tambah() {
+            const nilai1 = parseFloat(angka1.value); // Ubah input menjadi angka (float)
+            const nilai2 = parseFloat(angka2.value);
+            const hasilPenjumlahan = nilai1 + nilai2; // Operasi aritmatika
+            hasil.textContent = hasilPenjumlahan; // Tampilkan hasil
+        }
+
+        function kurang() {
+            const nilai1 = parseFloat(angka1.value); // Ubah input menjadi angka (float)
+            const nilai2 = parseFloat(angka2.value);
+            const hasilPengurangan = nilai1 - nilai2; // Operasi aritmatika
+            hasil.textContent = hasilPengurangan; // Tampilkan hasil
+        }
+        function kali() {
+            const nilai1 = parseFloat(angka1.value); // Ubah input menjadi angka (float)
+            const nilai2 = parseFloat(angka2.value);
+            const hasilPerkalian = nilai1 * nilai2; // Operasi aritmatika
+            hasil.textContent = hasilPerkalian; // Tampilkan hasil
+        }
+        function bagi() {
+            const nilai1 = parseFloat(angka1.value); // Ubah input menjadi angka (float)
+            const nilai2 = parseFloat(angka2.value);
+            const hasilPembagian = nilai1 / nilai2; // Operasi aritmatika
+            hasil.textContent = hasilPembagian; // Tampilkan hasil
+        }
+
+    </script>
+</body>
+
+</html>

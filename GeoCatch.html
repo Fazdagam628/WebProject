@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo Catch & Dodge</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            background-color: rgb(82, 82, 82);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        #welcomeScreen,
+        #gameScreen,
+        #leaderboardScreen {
+            background: gray;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 12px;
+            margin: 20px;
+            display: none;
+        }
+
+        #welcomeScreen.active,
+        #gameScreen.active,
+        #leaderboardScreen.active {
+            display: block;
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            background-color: rgb(9, 255, 0);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+        }
+
+        button:hover {
+            background-color: rgba(5, 111, 2, 1);
+        }
+
+        #gameCanvas {
+            border: 2px solid #ccc;
+            background-color: rgb(48, 47, 47);
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        #score,
+        #timer {
+            font-size: 24px;
+            background-color: #ccc;
+            padding: 5px 15px;
+            border-radius: 8px;
+        }
+
+        .leaderboard-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+
+        #timer.warning {
+            background-color: #ffebee;
+            color: red;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Show Welcome screen -->
+        <div id="welcomeScreen" class="active">
+            <h2>Welcome to Geo Catch And & Dodge</h2>
+            <input type="text" id="username" placeholder="Username">
+            <br>
+            <input type="number" id="gameTime" placeholder="Game Time in seconds" value="60" min="10" max="300">
+            <br>
+            <button onclick="startGame()">Start Game</button>
+        </div>
+        <div id="gameScreen">
+            <div class="game-info">
+                <div id="score">Score: 0</div>
+                <div id="timer">Time: 0s</div>
+            </div>
+            <canvas id="gameCanvas" width="500" height="600"></canvas>
+        </div>
+
+        <!-- Leaderboard Screen -->
+        <div id="leaderboardScreen">
+            <h2>LEADERBOARD</h2>
+            <div id="leaderboardList"></div>
+            <button onclick="showWelcomeScreen()">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        //Screen Management
+        let currentState = 'welcome';
+        let game = null;
+        let currentUsername = '';
+
+        function showScreen(screenName) {
+            document.getElementById('welcomeScreen').classList.remove('active');
+            document.getElementById('gameScreen').classList.remove('active');
+            document.getElementById('leaderboardScreen').classList.remove('active');
+            document.getElementById(screenName + 'Screen').classList.add('active');
+            currentScreen = screenName;
+        }
+
+        function showWelcomeScreen() {
+            showScreen('welcome');
+        }
+
+        function startGame() {
+            const username = document.getElementById('username').value.trim();
+            const gameTime = parseInt(document.getElementById('gameTime').value) || 60;
+
+            if (username && gameTime >= 10 && gameTime <= 300) {
+                currentUsername = username;
+                showScreen('game');
+                game = new Game(gameTime)
+            } else {
+                alert('Masukkan nama dan waktu (10 - 300 detik)')
+            }
+        }
+
+        function showLeaderboard() {
+            showScreen('leaderboard');
+            updateLeaderboard();
+        }
+
+        function updateLeaderboard() {
+            const scores = JSON.parse(localStorage.getItem('scores') || '[]');
+            const leaderboardList = document.getElementById('leaderboardList');
+            leaderboardList.innerHTML = '';
+
+            scores.sort((a, b) => b.scores - a.scores)
+                .slice(0, 10)
+                .forEach((score, index) => {
+                    const entry = document.createElement('div');
+                    entry.className = 'leaderboard.entry';
+                    entry.innerHTML = `
+                <span>${index + 1}. ${score.username}</span>
+                <span>${score.score} points</span>`;
+                    leaderboardList.appendChild(entry);
+                });
+        }
+
+        class Game {
+            constructor(gameTime) {
+                this.canvas = document.getElementById('gameCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.score = 0;
+                this.gameOver = false;
+                this.timeLeft = gameTime;
+                this.timerElement = document.getElementById('timer');
+
+                //player
+                this.player = {
+                    x: this.canvas.width / 2,
+                    y: this.canvas.height - 30,
+                    width: 30,
+                    height: 30,
+                    speed: 5
+                };
+
+                //array for items
+                this.squares = [];//yellow squares (points)
+                this.circles = [];//orange circle (gameOver)
+
+                //controls
+                this.keys = {
+                    left: false,
+                    right: false
+                };
+
+                this.setupEventListener();
+                this.startTimer();
+                this.gameLoop();
+                this.updateScore(0);
+            }
+
+            setupEventListener() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') this.keys.left = true;
+                    if (e.key === 'ArrowRight') this.keys.right = true;
+                });
+                document.addEventListener('keyup', (e) => {
+                    if (e.key === 'ArrowLeft') this.keys.left = false;
+                    if (e.key === 'ArrowRight') this.keys.right = false;
+                });
+            }
+            startTimer() {
+                this.updateTimer();
+                this.timerInterval = setInterval(() => {
+                    this.timeLeft--;
+                    this.updateTimer();
+
+                    if (this.timeLeft <= 0) {
+                        this.gameOver = true;
+                        this.endGame();
+                    }
+                }, 1000);
+            }
+            updateTimer() {
+                this.timerElement.textContent = `Time: ${this.timeLeft}s`;
+                if (this.timeLeft <= 10) {
+                    this.timerElement.classList.add('warning');
+                } else {
+                    this.timerElement.classList.remove('warning');
+                }
+            }
+
+            updateScore(newScore) {
+                this.score = newScore;
+                document.getElementById('score').textContent = `Score: ${this.score}`;
+            }
+
+            spawnItems() {
+                if (Math.random() < 0.02) {
+                    this.squares.push({
+                        x: Math.random() * (this.canvas.width - 20),
+                        y: -20,
+                        size: 20,
+                        speed: 2
+                    });
+                }
+
+                if (Math.random() < 0.01) {
+                    this.circles.push({
+                        x: Math.random() * (this.canvas.width - 20),
+                        y: -20,
+                        radius: 10,
+                        speed: 2
+                    });
+                }
+            }
+
+            movePlayer() {
+                if (this.keys.left && this.player.x > 0) {
+                    this.player.x -= this.player.speed;
+                }
+                if (this.keys.right && this.player.x < this.canvas.width - this.player.width) {
+                    this.player.x += this.player.speed;
+                }
+            }
+            moveItems() {
+                for (let i = this.squares.length - 1; i >= 0; i--) {
+                    this.squares[i].y += this.squares[i].speed;
+                    if (this.squares[i].y > this.canvas.height) {
+                        this.squares.splice(i, 1);
+                    }
+                }
+                for (let i = this.circles.length - 1; i >= 0; i--) {
+                    this.circles[i].y += this.circles[i].speed;
+                    if (this.circles[i].y > this.canvas.height) {
+                        this.circles.splice(i, 1);
+                    }
+                }
+            }
+            checkCollisions() {
+                for (let i = this.squares.length - 1; i >= 0; i--) {
+                    if (this.checkCollision(this.squares[i], this.player)) {
+                        this.updateScore(this.score + 10);
+                        this.squares.splice(i, 1);
+                    }
+                }
+                for (let i = this.circles.length - 1; i >= 0; i--) {
+                    if (this.checkCollision(this.circles[i], this.player)) {
+                        this.gameOver = true;
+                        this.endGame();
+                    }
+                }
+            }
+
+            checkCollision(item, player) {
+                const playerCenterX = player.x + player.width / 2;
+                const playerCenterY = player.y + player.height / 2;
+
+                if (item.radius) {
+                    const distance = Math.sqrt(
+                        Math.pow(playerCenterX - item.x, 2) +
+                        Math.pow(playerCenterY - item.y, 2)
+                    );
+                    return distance < (item.radius + player.width / 2);
+                } else {
+                    return (
+                        player.x < item.x + item.size &&
+                        player.x + player.width > item.x &&
+                        player.y < item.y + item.size &&
+                        player.y + player.height > item.y
+                    );
+                }
+            }
+
+            draw() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+                //draw player
+                this.ctx.fillStyle = 'blue';
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.player.x + this.player.width / 2, this.player.y);
+                this.ctx.lineTo(this.player.x + this.player.width, this.player.y + this.player.height);
+                this.ctx.lineTo(this.player.x, this.player.y + this.player.height);
+                this.ctx.closePath();
+                this.ctx.fill();
+
+                this.ctx.fillStyle = 'yellow';
+                this.squares.forEach(square => {
+                    this.ctx.fillRect(square.x, square.y, square.size, square.size);
+                });
+
+                this.ctx.fillStyle = 'orange';
+                this.circles.forEach(circle => {
+                    this.ctx.beginPath();
+                    this.ctx.arc(circle.x, circle.y, circle.radius, 0, Math.PI * 2);
+                    this.ctx.fill();
+                });
+            }
+
+            endGame() {
+                clearInterval(this.timerInterval);
+
+                const scores = JSON.parse(localStorage.getItem('scores') || '[]');
+                scores.push({
+                    username: currentUsername,
+                    score: this.score,
+                    time: document.getElementById('gameTime').value
+                });
+                localStorage.setItem('scores', JSON.stringify(scores));
+
+                showLeaderboard();
+            }
+
+            gameLoop() {
+                if (!this.gameOver) {
+                    this.spawnItems();
+                    this.checkCollisions();
+                    this.movePlayer();
+                    this.draw();
+                    this.moveItems();
+                    requestAnimationFrame(() => this.gameLoop());
+                }
+            }
+        }
+
+        showWelcomeScreen();
+    </script>
+</body>
+
+</html>
