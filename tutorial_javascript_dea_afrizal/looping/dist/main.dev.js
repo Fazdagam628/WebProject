@@ -33,4 +33,17 @@
 //   total += x.pop();
 // } while (x.length > 0);
 // console.log("Totalnya adalah " + total);
+// const pacarSaya = ["A", "B", "C", "D", "E"];
+// for (let pacar of pacarsaya) {
+//   console.log(pacar);
+// }
+// for (let pacar in pacarsaya) {
+//   console.log(pacar);
+// }
+// pacarSaya.forEach((pacar, index) => {
+//   console.log(pacar, index);
+// });
+// pacarSaya.map((pacar, index) => {
+//   console.log(pacar, index);
+// });
 "use strict";
