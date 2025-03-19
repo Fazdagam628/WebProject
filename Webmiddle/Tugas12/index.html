@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #todo-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .todo-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 5px;
+    }
+
+    .completed {
+        text-decoration: line-through;
+        color: gray;
+    }
+</style>
+
+<body>
+    <h1>To-Do List</h1>
+    <input type="text" name="new-task" id="new-task" placeholder="Tambahkan tugas baru">
+    <button id="add-task">Tambah</button>
+    <ul id="todo-list"></ul>
+
+    <script>
+        // Variabel untuk mendapatkan elemen elemen DOM
+        const taskInput = document.getElementById('new-task');
+        const addTaskButton = document.getElementById('add-task');
+        const todoList = document.getElementById('todo-list');
+
+        // Fungsi unuk menambahkan tugas baru
+        function addTask() {
+            const taskText = taskInput.value.trim();
+            if (taskText !== '') {
+                const li = document.createElement('li');
+                li.className = 'todo-item';
+
+                // Menambahkan teks tugas
+                const taskSpan = document.createElement('span');
+                taskSpan.textContent = taskText;
+                li.appendChild(taskSpan);
+
+                // Menambahkan tombol selesai
+                const completeButton = document.createElement('button');
+                completeButton.textContent = 'Selesai';
+                completeButton.addEventListener('click', function () {
+                    taskSpan.classList.toggle('completed');
+                });
+                li.appendChild(completeButton);
+
+                // Menambahkan tombol hapus
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Hapus';
+                deleteButton.addEventListener('click', function () {
+                    todoList.removeChild(li);
+                });
+                li.appendChild(deleteButton);
+
+                // Menambahkan tugas ke daftar
+                todoList.appendChild(li);
+
+                // Mengosongkan input
+                taskInput.value = '';
+            }
+        }
+
+        // Event listener untuk tombol tambah
+        addTaskButton.addEventListener('click', addTask);
+
+        // Event listener untuk menambahkan tugas dengan tombol enter
+        taskInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+
+        });
+
+        // Menyimpan data todo list ke local storage
+        function saveTasks() {
+            const tasks = [];
+            document.querySelectorAll('#todo-list li span').forEach(task => {
+                tasks.push(task.textContent);
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Fungsi memuat tugas dari local storage
+        function loadTask() {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.forEach(taskText => {
+                const li = document.createElement('li');
+                li.className = 'todo-item';
+
+                const taskSpan = document.createElement('span');
+                taskSpan.textContent = taskText;
+                li.appendChild(taskSpan);
+
+                const completeButton = document.createElement('button');
+                completeButton.textContent = 'Selesai';
+                completeButton.addEventListener('click', function () {
+                    taskSpan.classList.toggle('completed');
+                    saveTasks();
+                });
+                li.appendChild(completeButton);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Hapus';
+                deleteButton.addEventListener('click', function () {
+                    todoList.removeChild(li);
+                    saveTasks();
+                });
+                li.appendChild(deleteButton);
+
+                todoList.appendChild(li);
+            });
+        }
+
+        // Memuat tugas saat halaman dimuat
+        window.onload = loadTask;
+
+        // Menyimpan tugas setiap kali ada perubahan
+        addTaskButton.addEventListener('click', function () {
+            addTask();
+            saveTasks();
+        })
+
+        taskInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                addTask();
+                saveTasks();
+            }
+        });
+    </script>
+</body>
+
+</html>

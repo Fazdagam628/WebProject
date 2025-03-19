@@ -1,0 +1,22 @@
+---
+import "../styles/global.css";
+
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | Fazdagam</title>
+  </head>
+  <body>
+    <h1 style="background: tomato;">{title}</h1>
+    <slot>
+      <button>No Slot</button>
+      <!-- default value is loaded... -->
+      <!-- Ini isi konten dari luar -->
+    </slot>
+  </body>
+</html>

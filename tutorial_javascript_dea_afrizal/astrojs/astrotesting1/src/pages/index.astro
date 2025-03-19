@@ -1,0 +1,32 @@
+---
+import Layouts from "../layouts/layouts.astro";
+import Link from "../components/Link.astro";
+const title = "Home Page";
+
+// console.log(name, webTitle);
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+---
+
+<Layouts title={title}>
+  <!-- <div class="divHover">hover me</div> -->
+
+  <Link link="/about" cssClass="link" content="Go To About" />
+  <Link link="/about" cssClass="link" content="Go To About" />
+  <Link link="/about" cssClass="link" content="Go To About" />
+</Layouts>
+
+<!-- <style lang="scss">
+  .divHover {
+    background-color: cadetblue;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 24px;
+    width: 50%;
+    height: auto;
+    &:hover {
+      background-color: chocolate;
+    }
+  }
+</style> -->
