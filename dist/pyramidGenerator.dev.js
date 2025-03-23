@@ -1,9 +1,9 @@
 "use strict";
 
-var character = "|";
+var character = "#";
 var count = 12;
 var rows = [];
-var inverted = false;
+var inverted = true;
 
 function padRow(rowNumber, rowCount) {
   return " ".repeat(rowCount - rowNumber) + character.repeat(2 * rowNumber - 1) + " ".repeat(rowCount - rowNumber);
@@ -17,11 +17,12 @@ for (var i = 1; i <= count; i++) {
   }
 }
 
-var result = "";
+var result = ""; // for (const row of rows) {
+//   result = result + row + "\n";
+// }
 
-for (var _i = 0, _rows = rows; _i < _rows.length; _i++) {
-  var row = _rows[_i];
-  result = result + row + "\n";
+for (var _i = 0; _i < rows.length; _i++) {
+  result += rows[_i] + "\n";
 }
 
 console.log(result);
