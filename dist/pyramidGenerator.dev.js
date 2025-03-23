@@ -25,3 +25,5 @@ for (var _i = 0, _rows = rows; _i < _rows.length; _i++) {
 }
 
 console.log(result);
+console.log(result);
+console.log(result);
