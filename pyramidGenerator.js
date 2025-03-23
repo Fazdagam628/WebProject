@@ -25,4 +25,7 @@ for (const row of rows) {
   result = result + row + "\n";
 }
 
+
+console.log(result);
+console.log(result);
 console.log(result);
