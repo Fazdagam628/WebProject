@@ -21,8 +21,12 @@ for (let i = 1; i <= count; i++) {
 
 let result = "";
 
-for (const row of rows) {
-  result = result + row + "\n";
+// for (const row of rows) {
+//   result = result + row + "\n";
+// }
+
+for (let i = 0; i < rows.length; i++) {
+  result += rows[i] + "\n";
 }
 
 console.log(result);

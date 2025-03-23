@@ -17,11 +17,12 @@ for (var i = 1; i <= count; i++) {
   }
 }
 
-var result = "";
+var result = ""; // for (const row of rows) {
+//   result = result + row + "\n";
+// }
 
-for (var _i = 0, _rows = rows; _i < _rows.length; _i++) {
-  var row = _rows[_i];
-  result = result + row + "\n";
+for (var _i = 0; _i < rows.length; _i++) {
+  result += rows[_i] + "\n";
 }
 
 console.log(result);
