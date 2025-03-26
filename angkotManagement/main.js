@@ -114,7 +114,7 @@
 // //   }
 // // };
 
-var penumpang = ["fauzan", undefined, "dodi"];
+var penumpang = [];
 
 var tambahPenumpang = function (namaPenumpang, penumpang) {
   // Jika angkot kosong
