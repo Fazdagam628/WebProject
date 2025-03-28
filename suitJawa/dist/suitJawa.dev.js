@@ -7,7 +7,7 @@ while (tanya) {
   var p = prompt("Pilih: gajah, semut, orang"); // menangkap pilihan computer
   // membangkitkan bilangan random
 
-  var comp = Math.random(); // console.log(comp);
+  var comp = Math.random();
 
   if (comp < 0.34) {
     comp = "gajah";

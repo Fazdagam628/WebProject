@@ -6,7 +6,6 @@ while (tanya) {
   // menangkap pilihan computer
   // membangkitkan bilangan random
   var comp = Math.random();
-  // console.log(comp);
 
   if (comp < 0.34) {
     comp = "gajah";
