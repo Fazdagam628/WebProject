@@ -48,15 +48,15 @@
 
 // console.log(s);
 
-// function buatPersegi(panjang, lebar) {
-//   let hasil = "";
-//   for (let i = 0; i < lebar; i++) {
-//     for (let j = 0; j < panjang; j++) {
-//       hasil += "*";
-//     }
-//     hasil += "\n";
-//   }
-//   return hasil;
-// }
-// 
-// console.log(buatPersegi(5, 4));
+function buatPersegi(panjang, lebar) {
+  let hasil = "";
+  for (let i = 0; i < lebar; i++) {
+    for (let j = 0; j < panjang; j++) {
+      hasil += "*";
+    }
+    hasil += "\n";
+  }
+  return hasil;
+}
+
+console.log(buatPersegi(5, 4));

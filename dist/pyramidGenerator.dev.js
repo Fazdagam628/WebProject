@@ -1,3 +1,5 @@
+"use strict";
+
 // const character = "#";
 // const count = 12;
 // const rows = [];
@@ -45,16 +47,18 @@
 //             s += '\n'
 //         }
 // console.log(s);
-// function buatPersegi(panjang, lebar) {
-//   let hasil = "";
-//   for (let i = 0; i < lebar; i++) {
-//     for (let j = 0; j < panjang; j++) {
-//       hasil += "*";
-//     }
-//     hasil += "\n";
-//   }
-//   return hasil;
-// }
-// 
-// console.log(buatPersegi(5, 4));
-"use strict";
+function buatPersegi(panjang, lebar) {
+  var hasil = "";
+
+  for (var i = 0; i < lebar; i++) {
+    for (var j = 0; j < panjang; j++) {
+      hasil += "*";
+    }
+
+    hasil += "\n";
+  }
+
+  return hasil;
+}
+
+console.log(buatPersegi(5, 4));
