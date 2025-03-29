@@ -50,6 +50,7 @@
 // }
 //
 // let fauzan = new Mahasiswa("Fauzan", 10);
+// ---------
 // function Mahasiswa(nama, energi) {
 //   this.nama = nama;
 //   this.energi = energi;
