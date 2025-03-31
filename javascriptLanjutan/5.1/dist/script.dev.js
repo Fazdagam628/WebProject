@@ -2,12 +2,10 @@
 // const nama = "Fauzan";
 // const umur = 18;
 // console.log(`Halo, nama saya ${nama},dan umur saya ${umur} tahun`);
-
 // Embedded Expressions
 // console.log(`${alert("Halo")}`);
 // const x = 10;
 // console.log(`${x % 2 == 0 ? "Genap" : "Ganjil"}`);
-
 // HTML Fragments
 // const mhs = {
 //   nama: "Fauzan",
@@ -23,3 +21,4 @@
 // </div>`;
 // 
 // console.log(el);
+"use strict";
