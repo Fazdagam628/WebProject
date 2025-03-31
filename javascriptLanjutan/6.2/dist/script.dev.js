@@ -4,9 +4,9 @@
 // function kalkulasi(a, b) {
 //   return [a + b, a - b, a * b, a / b];
 // }
-// const jumlah = penjumlahanPerkalian(2, 3)[0];
-// const kali = penjumlahanPerkalian(2, 3)[1];
-// const [jumlah, kali] = penjumlahanPerkalian(2, 3);
+// const jumlah = kalkulasi(2, 3)[0];
+// const kali = kalkulasi(2, 3)[1];
+// const [jumlah, kali] = kalkulasi(2, 3);
 // console.log(jumlah);
 // console.log(kali);
 // const [
