@@ -1,7 +1,6 @@
 "use strict";
 
 // const coba = ["satu", "dua", "tiga"];
-//
 // const [a, b, c] = coba;
 // console.log(a); // "satu"
 // console.log(b); // "dua"
@@ -27,7 +26,6 @@
 // function coba() {
 //   return [1, 2];
 // }
-//
 // const [a, b] = coba();
 // console.log(b);
 // Rest parameter

@@ -5,7 +5,7 @@
 //   return [a + b, a - b, a * b, a / b];
 // }
 // const jumlah = kalkulasi(2, 3)[0];
-// const kali = kalkulasi(2, 3)[1];
+// const kali = kalkulasi(2, 3)[2];
 // const [jumlah, kali] = kalkulasi(2, 3);
 // console.log(jumlah);
 // console.log(kali);
@@ -24,7 +24,6 @@
 //     bagi: a / b,
 //   };
 // }
-//
 // const { bagi, kali, kurang, tambah } = kalkulasi(4, 5);
 // console.log(kurang);
 // Destructuring function arguments
