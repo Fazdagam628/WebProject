@@ -1,0 +1,23 @@
+[
+  {
+    "nama": "fauz",
+    "nrp": "0892323",
+    "email": "Fauan@gmail.com",
+    "jurusan": "teknik informatika",
+    "idDosenwali": 1
+  },
+  {
+    "nama": "Erik",
+    "nrp": "0892323",
+    "email": "Fauan@gmail.com",
+    "jurusan": "teknik informatika",
+    "idDosenwali": 2
+  },
+  {
+    "nama": "maul",
+    "nrp": "0892323",
+    "email": "Fauan@gmail.com",
+    "jurusan": "teknik informatika",
+    "idDosenwali": 3
+  }
+]
