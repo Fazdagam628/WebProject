@@ -9,6 +9,9 @@ export default defineConfig({
       input: {
         index: "index.html",
         hello_world: "hello-world.html",
+        todolist: "todolist.html",
+        table: "table.html",
+        event: "event.html",
       },
     },
   },

@@ -1,18 +1,24 @@
+import "./HelloWorld.css";
 export default function HelloWorld() {
+  const props = {
+    text: "hello world! from spread syntax",
+  };
   return (
     <div>
-      <HeaderHelloWorld />
+      <HeaderHelloWorld {...props} />
       <ParagraphHelloWorld />
       <FooterHelloWorld />
     </div>
   );
 }
 
-function HeaderHelloWorld() {
-  return <h1>Hello World!</h1>;
+function HeaderHelloWorld({ text = "Ups,Lupa kasih teks" }) {
+  //   text = "Hello world!";
+  return <h1 className="title">{text.toUpperCase()}</h1>;
 }
 function ParagraphHelloWorld() {
-  return <p>Selamat datang ReactJS</p>;
+  const text = "Selamat datang ReactJS";
+  return <p className="content">{text.toLowerCase()}</p>;
 }
 
 function FooterHelloWorld() {
