@@ -5,6 +5,7 @@ import MyButton from "./MyButton";
 import Toolbar from "./Toolbar";
 import SearchForm from "../form/SearchForm";
 import SayHelloForm from "../form/SayHelloForm";
+import Counter from "../form/Counter";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -20,5 +21,7 @@ createRoot(document.getElementById("root")).render(
     />
     <SearchForm />
     <SayHelloForm />
+    <Counter />
+    <Counter />
   </StrictMode>
 );
