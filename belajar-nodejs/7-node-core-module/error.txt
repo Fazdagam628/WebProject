@@ -1,0 +1,1 @@
+Error: ENOENT: no such file or directory, open 'D:\WebProject\belajar-nodejs\7-node-core-module\data\test.txt'
