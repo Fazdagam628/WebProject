@@ -1,11 +1,29 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
+const morgan = require("morgan");
 const app = express();
 const port = 3000;
 
 // Gunakan EJS
 app.set("view engine", "ejs");
+
+// Third-party middleware
 app.use(expressLayouts);
+
+// Built-in middleware
+app.use(express.static("public"));
+app.use(morgan("dev"));
+
+// Application level middleware
+app.use((req, res, next) => {
+  console.log(`Time: ${Date.now()}`);
+  next();
+});
+
+app.use((req, res, next) => {
+  console.log("ini middleware berikutnya");
+  next();
+});
 
 app.get("/", (req, res) => {
   // res.sendFile("./index.html", { root: __dirname });
@@ -27,7 +45,7 @@ app.get("/", (req, res) => {
     nama: "Fauzan",
     title: "Halaman Home",
     mahasiswa: mahasiswa,
-    layout: "layouts/main-layout",    
+    layout: "layouts/main-layout",
   });
 });
 
@@ -53,7 +71,7 @@ app.get("/product/:id", (req, res) => {
   );
 });
 
-app.use("/", (req, res) => {
+app.use((req, res) => {
   res.status(404);
   res.send("<h1>404</h1>");
 });
