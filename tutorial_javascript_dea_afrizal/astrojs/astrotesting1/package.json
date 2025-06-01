@@ -9,7 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.5.2"
+    "astro": "^5.5.2",
+    "astrotesting1": "file:"
   },
   "devDependencies": {
     "sass-embedded": "^1.85.1"

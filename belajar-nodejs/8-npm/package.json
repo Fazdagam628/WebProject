@@ -11,6 +11,7 @@
   "author": "Fauzan Masud Ramadhani",
   "license": "ISC",
   "dependencies": {
+    "8-npm": "file:",
     "chalk": "^4.1.0",
     "validator": "^13.5.2"
   },
