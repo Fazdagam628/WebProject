@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Percobaan</title>
     <script>
-        console.log("Console");
+      console.log("Console");
     </script>
-</head>
+  </head>
 
-<body>
-    <h1> Percobaan </h1>
-    <p style="text-align: center;"> Dibawah ini adalah JS</p>
+  <body>
+    <h1>Percobaan</h1>
+    <p style="text-align: center">Dibawah ini adalah JS</p>
+    <button type="button" id="checked">Check tombol ini</button>
+    <input type="text" id="inputku" />
     <script>
-        document.write("Hello World");
-    </script>
-    <script src="JavaScript.js">
-    </script>
-    <button onclick="alert('Anda Menang!!!!!!')">Click This Button</button>
-    <textarea onkeyup="document.getElementById('counter').innerText = this.value.length" cols="30"
-        rows="10"> </textarea>
-    <a href="javascript:alert('Anda kena tipu')">Klik untuk mendapatkan tiket surga</a>
-</body>
+      const checked = document.getElementById("checked");
+      const inputku = document.getElementById("inputku");
 
+      checked.addEventListener("click", (e) => {
+        console.log(e);
+        console.log(e.target);
+        console.log(e.target.innerText);
+        console.log(e.target.innerHTML);
+        console.log(e.target.type);
+        console.log(e.target.id);
+      });
+      inputku.addEventListener("input", (e) => {
+        console.log(e);
+        console.log(e.target);
+        console.log(e.target.value);
+        console.log(e.target.type);
+        console.log(e.target.id);
+      });
+      document.write("Hello World");
+    </script>
+    <script src="JavaScript.js"></script>
+    <button onclick="alert('Anda Menang!!!!!!')">Click This Button</button>
+    <textarea
+      onkeyup="document.getElementById('counter').innerText = this.value.length"
+      cols="30"
+      rows="10"
+    >
+    </textarea>
+    <a href="javascript:alert('Anda kena tipu')"
+      >Klik untuk mendapatkan tiket surga</a
+    >
+  </body>
 </html>
